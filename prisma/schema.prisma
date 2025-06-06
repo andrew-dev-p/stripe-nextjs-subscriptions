@@ -30,7 +30,7 @@ model User {
   name       String?
   image      String?
   plan       Plan    @default(FREE)
-  customerId String?
+  customerId String? @unique
 
   subscriptionId String?
   subscription   Subscription?
@@ -46,6 +46,9 @@ model Subscription {
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
+
+  startDate DateTime @default(now())
+  endDate   DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
